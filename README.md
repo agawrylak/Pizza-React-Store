@@ -9,10 +9,9 @@ Project is created with:
 * Java
 * Spring Boot
 * PostgreSQL
-* React
+* React.js
 * CSS (with the help of Material-UI's styling solution)
 * MaterialUI
-* A little touch of JS
 ## Issues
 * Project is not yet completed, but if I could go back in time and make some changes, I would use Gatsby/Next.js. I decided to go with pure React because of my lack of experience, but now I know there are far better alternatives for static websites. 
 * Right now I would choose Styled Components instead of Material-UI's styling solution, because as far as I know it's an industry standard. 
