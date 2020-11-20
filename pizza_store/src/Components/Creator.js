@@ -1,6 +1,6 @@
 import React from 'react'
-import PizzaForm from './Pizza/PizzaForm'
-import IngredientForm from './Ingredient/IngredientForm'
+import PizzaForm from './PizzaForm'
+import IngredientForm from './IngredientForm'
 import {makeStyles} from "@material-ui/core/styles"
 
 const useStyles = makeStyles({

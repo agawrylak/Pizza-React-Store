@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import './App.css';
-import PizzaContainer from './Pizza/PizzaContainer';
+import '../App.css';
+import PizzaContainer from './PizzaContainer';
 import Nav from './Nav'
 import Creator from './Creator'
 import {Route, HashRouter} from 'react-router-dom'
 import Login from './Login'
-import Cart from './Cart/Cart'
+import Cart from './Cart'
 
 
 function App() {

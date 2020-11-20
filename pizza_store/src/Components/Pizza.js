@@ -51,7 +51,7 @@ function Pizza(props) {
             <Card className={classes.card} >
                     <CardHeader title={props.title} classes={{root: classes.cardHeader}} />
                     <CardMedia style={{ display:'flex', justifyContent:'center' }}>
-                        <img src={require('./pizza_img.jpg')}/>
+                        <img src={require('../Assets/pizza_img.jpg')}/>
                     </CardMedia>
                     <CardContent classes={{root: classes.cardActions}}>
                         <PizzaDesc ingredients={props.ingredients}></PizzaDesc>
