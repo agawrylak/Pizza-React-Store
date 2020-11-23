@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("com.agawrylak.PizzaStore")
 @EntityScan
 public class PizzaStoreConfig {
-    public PizzaStoreConfig(){
-        super();
-    }
-
+  public PizzaStoreConfig() {
+    super();
+  }
 }

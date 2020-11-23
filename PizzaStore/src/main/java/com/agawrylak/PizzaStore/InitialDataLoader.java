@@ -14,36 +14,34 @@ import java.util.Arrays;
 @Component
 public class InitialDataLoader implements ApplicationRunner {
 
-    private PizzaService pizzaService;
+  private PizzaService pizzaService;
 
-    @Autowired
-    public InitialDataLoader(PizzaService pizzaService) {
-        this.pizzaService = pizzaService;
-    }
+  @Autowired
+  public InitialDataLoader(PizzaService pizzaService) {
+    this.pizzaService = pizzaService;
+  }
 
-    @Override
-    @Transactional
-    public void run(ApplicationArguments args) throws Exception {
-        var tomatoSauce = new Ingredient("sos pomidorowy");
-        var cheese = new Ingredient("ser");
-        var pineapple = new Ingredient("ananas");
-        var bacon = new Ingredient("boczek");
+  @Override
+  @Transactional
+  public void run(ApplicationArguments args) throws Exception {
+    var tomatoSauce = new Ingredient("sos pomidorowy");
+    var cheese = new Ingredient("ser");
+    var pineapple = new Ingredient("ananas");
+    var bacon = new Ingredient("boczek");
 
-        Ingredient[] ingredientArray1 = {tomatoSauce, cheese};
-        Ingredient[] ingredientArray2 = {tomatoSauce, cheese, pineapple, bacon};
+    Ingredient[] ingredientArray1 = {tomatoSauce, cheese};
+    Ingredient[] ingredientArray2 = {tomatoSauce, cheese, pineapple, bacon};
 
-        Pizza margarita = new Pizza();
-        margarita.setName("Margarita");
+    Pizza margarita = new Pizza();
+    margarita.setName("Margarita");
 
-        Pizza hawajska = new Pizza();
-        hawajska.setName("Hawajska");
+    Pizza hawajska = new Pizza();
+    hawajska.setName("Hawajska");
 
+    margarita.setIngredients(Arrays.asList(ingredientArray1));
+    hawajska.setIngredients(Arrays.asList(ingredientArray2));
 
-        margarita.setIngredients(Arrays.asList(ingredientArray1));
-        hawajska.setIngredients(Arrays.asList(ingredientArray2));
-
-        pizzaService.add(margarita);
-        pizzaService.add(hawajska);
-
-    }
+    pizzaService.add(margarita);
+    pizzaService.add(hawajska);
+  }
 }

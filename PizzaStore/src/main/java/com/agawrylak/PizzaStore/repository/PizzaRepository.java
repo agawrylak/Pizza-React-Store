@@ -13,7 +13,4 @@ public interface PizzaRepository extends JpaRepository<Pizza, Long> {
 
     List<Pizza> findAll();
 
-
-
-
 }

@@ -1,62 +1,61 @@
-import React, {useEffect, useState} from 'react'
-import '../App.css';
-import PizzaContainer from './PizzaContainer';
-import Nav from './Nav'
-import Creator from './Creator'
-import {Route, HashRouter} from 'react-router-dom'
-import Login from './Login'
-import Cart from './Cart'
-
+import React, { useEffect, useState } from "react";
+import "../App.css";
+import PizzaContainer from "./PizzaContainer";
+import Nav from "./Nav";
+import Creator from "./Creator";
+import { Route, HashRouter } from "react-router-dom";
+import Login from "./Login";
+import Cart from "./Cart";
+import { PizzaAPI } from "../api/PizzaAPI";
+import { IngredientAPI } from "../api/IngredientAPI";
 
 function App() {
-  const [pizzas, pizzasState] = useState([]);
-  const [ingredients, ingredientsState] = useState([]);
+  const [pizzas, setPizzas] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
 
-
-  const fetchPizzas = () => {
-          
-    var url = 'http://localhost:9090/pizza/all'
-    fetch(url)
-        .then((response) => response.json())
-        .then((data) => pizzasState(data))
-
+  function fetchPizzas() {
+    return PizzaAPI.getAllPizzas().then((response) => setPizzas(response.data));
   }
 
-  const fetchIngredients = () => {
-
-  var url = 'http://localhost:9090/ingredient/all'
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => ingredientsState(data))
-      console.log(ingredients)
-
+  function fetchIngredients() {
+    return IngredientAPI.getAllIngredients().then((response) =>
+      setIngredients(response.data)
+    );
   }
-
 
   useEffect(() => {
-
-    fetchPizzas();
-    fetchIngredients();
-
-
-  },[])
-
+    fetchIngredients().then((r) => console.log(r));
+    fetchPizzas().then((r) => console.log(r));
+  }, []);
 
   return (
     <div>
-        <HashRouter>
-          <Nav></Nav>
-          <div className="content">
-            <Route path="/create" render={(props) => (
-            <Creator fetchIngredients={fetchIngredients()} ingredients={ingredients} fetchPizzas={fetchPizzas()}></Creator>)}/>
-            <Route path="/order" render={(props) => (
-            <PizzaContainer fetchIngredients={fetchIngredients} fetchPizzas={fetchPizzas}></PizzaContainer>)}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/cart" component={Cart}/>
-
-          </div>
-        </HashRouter>
-
+      <HashRouter>
+        <Nav />
+        <div className="content">
+          <Route
+            path="/create"
+            render={(props) => (
+              <Creator
+                getAll={fetchIngredients()}
+                ingredients={ingredients}
+                fetchPizzas={fetchPizzas()}
+              />
+            )}
+          />
+          <Route
+            path="/order"
+            render={(props) => (
+              <PizzaContainer
+                fetchIngredients={fetchIngredients}
+                fetchPizzas={fetchPizzas}
+              />
+            )}
+          />
+          <Route path="/login" component={Login} />
+          <Route path="/cart" component={Cart} />
+        </div>
+      </HashRouter>
     </div>
   );
 }

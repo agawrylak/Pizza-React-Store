@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "ingredient")
 @Getter
@@ -21,18 +20,18 @@ import java.util.Set;
 @EqualsAndHashCode
 public class Ingredient implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "ingredients")
-    private Set<Pizza> pizzas = new HashSet<>();
+  @JsonIgnore
+  @ManyToMany(mappedBy = "ingredients")
+  private Set<Pizza> pizzas = new HashSet<>();
 
-    public Ingredient(String name) {
-        this.name = name;
-    }
+  public Ingredient(String name) {
+    this.name = name;
+  }
 }

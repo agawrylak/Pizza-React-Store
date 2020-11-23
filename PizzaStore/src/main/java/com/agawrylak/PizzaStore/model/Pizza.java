@@ -19,50 +19,48 @@ import java.util.stream.Stream;
 @Setter
 @Getter
 @EqualsAndHashCode
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-                property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Pizza implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
-    @JoinTable(name = "pizza_ingredient",
-            joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
-    private List<Ingredient> ingredients = new ArrayList<>();
+  @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+  @JoinTable(
+      name = "pizza_ingredient",
+      joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
+  private List<Ingredient> ingredients = new ArrayList<>();
 
-    @Column(name="cost")
-    private double pizzaCost;
+  @Column(name = "cost")
+  private double pizzaCost;
 
-    @OneToMany(mappedBy="pizza",
-            orphanRemoval = true,
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<PizzaOrder> pizzaOrders;
+  @OneToMany(
+      mappedBy = "pizza",
+      orphanRemoval = true,
+      fetch = FetchType.LAZY,
+      cascade = CascadeType.ALL)
+  private List<PizzaOrder> pizzaOrders;
 
-    public Pizza() {
-        super();
+  public Pizza() {
+    super();
+  }
+
+  public Pizza(String name, Ingredient... ingredients) {
+    this.name = name;
+    this.ingredients = Stream.of(ingredients).collect(Collectors.toList());
+    this.ingredients.forEach(x -> x.getPizzas().add(this));
+  }
+
+  public void setDefaultPizzaCost() {
+    double price = 10;
+    for (Ingredient ingredient : this.getIngredients()) {
+      price += 3.50;
     }
-
-    public Pizza(String name, Ingredient... ingredients) {
-        this.name = name;
-        this.ingredients = Stream.of(ingredients).collect(Collectors.toList());
-        this.ingredients.forEach(x -> x.getPizzas().add(this));
-    }
-
-    public void setDefaultPizzaCost() {
-        double price = 10;
-        for (Ingredient ingredient: this.getIngredients()){
-            price+=3.50;
-        }
-        this.setPizzaCost(price);
-    }
-
-
+    this.setPizzaCost(price);
+  }
 }
-

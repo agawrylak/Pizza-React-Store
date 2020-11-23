@@ -14,23 +14,21 @@ import javax.persistence.*;
 @Setter
 @Getter
 @EqualsAndHashCode
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class PizzaOrder {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY) //TODO: CHECK THIS OUT
-    @JoinColumn(name = "pizza_order_id")
-    private Pizza pizza;
+  @ManyToOne(fetch = FetchType.LAZY) // TODO: CHECK THIS OUT
+  @JoinColumn(name = "pizza_order_id")
+  private Pizza pizza;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_details_id")
-    private OrderDetails orderDetails;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "order_details_id")
+  private OrderDetails orderDetails;
 
-    @Column(name = "quantity")
-    private int quantity;
-
+  @Column(name = "quantity")
+  private int quantity;
 }
