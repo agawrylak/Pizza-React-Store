@@ -37,9 +37,9 @@ function App() {
             path="/create"
             render={(props) => (
               <Creator
-                getAll={fetchIngredients()}
+                fetchIngredients={fetchIngredients}
                 ingredients={ingredients}
-                fetchPizzas={fetchPizzas()}
+                fetchPizzas={fetchPizzas}
               />
             )}
           />
