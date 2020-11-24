@@ -22,7 +22,7 @@ function PizzaContainer() {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    setPizzas(PizzaAPI.getAllPizzas());
+    PizzaAPI.getAllPizzas().then(result => setPizzas(result.data));
   }, []);
 
   const makePizza = (pizza) => {

@@ -24,7 +24,7 @@ public class PizzaService {
     this.pizzaRepository = pizzaRepository;
   }
 
-  public Pizza findbyId(int id) {
+  public Pizza findById(int id) {
     List<Pizza> allPizzas = findAll();
     for (Pizza pizza : allPizzas) {
       if (pizza.getId() == id) {
@@ -32,6 +32,10 @@ public class PizzaService {
       }
     }
     return null;
+  }
+
+  public Pizza findByName(String name) {
+    return pizzaRepository.findByName(name).get(0);
   }
 
   public void add(Pizza pizza) {

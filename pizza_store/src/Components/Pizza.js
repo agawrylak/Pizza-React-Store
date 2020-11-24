@@ -41,7 +41,7 @@ function Pizza(props) {
   const classes = useStyles();
 
   function handleBuy() {
-    var pizza = {
+    const pizza = {
       name: props.title,
       ingredients: props.ingredients,
       cost: props.cost,

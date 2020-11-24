@@ -11,8 +11,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Entity
 @Table(name = "pizza")
@@ -48,12 +46,6 @@ public class Pizza implements Serializable {
 
   public Pizza() {
     super();
-  }
-
-  public Pizza(String name, Ingredient... ingredients) {
-    this.name = name;
-    this.ingredients = Stream.of(ingredients).collect(Collectors.toList());
-    this.ingredients.forEach(x -> x.getPizzas().add(this));
   }
 
   public void setDefaultPizzaCost() {

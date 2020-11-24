@@ -14,7 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 public class OrderDetailsController {
 
   private OrderDetailsService orderDetailsService;
@@ -26,7 +26,7 @@ public class OrderDetailsController {
 
   @CrossOrigin
   @PostMapping("/orderdetails/add")
-  public ResponseEntity<OrderDetails> addOrderDetails(
+  public ResponseEntity<OrderDetails> add(
       @RequestBody final OrderDetailsPOJO orderDetailsPOJO, final BindingResult bindingResult) {
     OrderDetails orderDetails = new OrderDetails();
 
@@ -34,6 +34,7 @@ public class OrderDetailsController {
     orderDetails.setSurname(orderDetailsPOJO.getSurname());
     orderDetails.setAddress(orderDetailsPOJO.getAddress());
     orderDetails.setEmail(orderDetailsPOJO.getEmail());
+    orderDetails.setPhoneNumber(orderDetailsPOJO.getPhoneNumber());
 
     orderDetailsService.add(orderDetails);
     return ResponseEntity.ok(orderDetails);

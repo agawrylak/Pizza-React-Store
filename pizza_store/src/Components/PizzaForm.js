@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   FormLabel,
 } from "@material-ui/core";
-import PizzaAPI from "../api/PizzaAPI";
+import {PizzaAPI} from "../api/PizzaAPI";
 
 const useStyles = makeStyles({
   box: {
@@ -57,7 +57,7 @@ function PizzaForm(props) {
       ingredients: [],
     };
 
-    for (var i = 0; i < pizzaIngredients.length; i++) {
+    for (let i = 0; i < pizzaIngredients.length; i++) {
       pizza.ingredients.push(pizzaIngredients[i]);
     }
     PizzaAPI.postPizza(pizza).then(response => console.log(response));

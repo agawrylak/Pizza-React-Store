@@ -1,7 +1,7 @@
 import React from "react";
 
 function PizzaDesc({ ingredients }) {
-  var listOfIngredients = ingredients.map((ingredient, index, array) => {
+  const listOfIngredients = ingredients.map((ingredient, index, array) => {
     if (index === array.length - 1) {
       return ingredient.name;
     }

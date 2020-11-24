@@ -8,7 +8,8 @@ import {
   FormLabel,
 } from "@material-ui/core/";
 import CartItem from "./CartItem";
-import {OrderDetailsAPI} from "../api/OrderDetailsAPI";
+import { OrderDetailsAPI } from "../api/OrderDetailsAPI";
+import { PizzaOrderAPI } from "../api/PizzaOrderAPI";
 
 const useStyles = makeStyles({
   box: {
@@ -77,13 +78,14 @@ function Cart() {
     return (
       <div className={classes.container}>
         {pizzaList.map((pizza) => (
-          <CartItem pizza={pizza} updateState={updateState}/>
+          <CartItem pizza={pizza} updateState={updateState} />
         ))}
         {pizzaCost()}
       </div>
     );
   };
 
+  //TODO: MAKE THIS ACTUALLY USEFUL
   function validateForm() {
     return (
       name.length > 0 &&
@@ -114,7 +116,25 @@ function Cart() {
     setPhoneNumber(e.target.value);
   }
 
+  function postPizzaOrders(orderID) {
+    if (orderID !== -1) {
+      for (let i = 0; i < pizzaList.length; i++) {
+        const pizzaOrder = {
+          pizza: pizzaList[i].name,
+          quantity: pizzaList[i].quantity,
+          orderDetailsID: orderID,
+        };
+        PizzaOrderAPI.postPizzaOrder(pizzaOrder).then((response) =>
+          console.log(response)
+        );
+      }
+    } else {
+      console.log("SOMETHING WENT WRONG");
+    }
+  }
+
   function onSubmit(e) {
+    let orderID = -1;
     e.preventDefault();
     const orderDetails = {
       name: name,
@@ -123,8 +143,10 @@ function Cart() {
       address: address,
       phoneNumber: phoneNumber,
     };
-  //TODO: FETCH HERE
-    OrderDetailsAPI.postOrderDetails(orderDetails);
+    OrderDetailsAPI.postOrderDetails(orderDetails).then((response) => {
+      orderID = response.data.id;
+      postPizzaOrders(orderID);
+    });
   }
 
   function getPizzasCost() {

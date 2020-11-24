@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 public class IngredientController {
 
     private IngredientService ingredientService;
@@ -22,13 +22,13 @@ public class IngredientController {
     @GetMapping("/ingredient/all")
     @ResponseBody
     @CrossOrigin
-    public List<Ingredient> getAllIngredients() {
+    public List<Ingredient> getAll() {
         return ingredientService.findAll();
     }
 
     @CrossOrigin
     @PostMapping("/ingredient/add")
-    public ResponseEntity<Ingredient> addIngredient(
+    public ResponseEntity<Ingredient> add(
             @RequestBody final Ingredient ingredient, final BindingResult bindingResult) {
         if (ingredientService.isDuplicate(ingredient)) {
             return ResponseEntity.badRequest().build();
@@ -39,7 +39,7 @@ public class IngredientController {
 
     @CrossOrigin
     @DeleteMapping("/ingredient/delete/{id}")
-    public ResponseEntity<String> deleteIngredient(
+    public ResponseEntity<String> delete(
             @PathVariable String id, final BindingResult bindingResult) {
         ingredientService.deleteById(id);
         return ResponseEntity.ok("Ingredient with id " + id + " deleted.");
