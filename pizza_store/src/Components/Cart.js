@@ -10,6 +10,7 @@ import {
 import CartItem from "./CartItem";
 import { OrderDetailsAPI } from "../api/OrderDetailsAPI";
 import { PizzaOrderAPI } from "../api/PizzaOrderAPI";
+import OrderDialog from "./OrderDialog";
 
 const useStyles = makeStyles({
   box: {
@@ -59,6 +60,8 @@ function Cart() {
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const [openDialog, setOpenDialog] = useState(false);
+
   function updateState() {
     let updatedPizzaList = [];
     Object.keys(localStorage).forEach((key) => {
@@ -74,46 +77,14 @@ function Cart() {
     updateState();
   }, []);
 
-  const showAllPizzas = () => {
-    return (
-      <div className={classes.container}>
-        {pizzaList.map((pizza) => (
-          <CartItem pizza={pizza} updateState={updateState} />
-        ))}
-        {pizzaCost()}
-      </div>
-    );
-  };
-
   //TODO: MAKE THIS ACTUALLY USEFUL
-  function validateForm() {
-    return (
-      name.length > 0 &&
-      surname.length > 0 &&
-      email.length > 0 &&
-      address.length > 0 &&
-      phoneNumber.length > 0
-    );
+
+  function handleDialogClose() {
+    setOpenDialog(false);
   }
 
-  function onChangeName(e) {
-    setName(e.target.value);
-  }
-
-  function onChangeSurname(e) {
-    setSurname(e.target.value);
-  }
-
-  function onChangeEmail(e) {
-    setEmail(e.target.value);
-  }
-
-  function onChangeAddress(e) {
-    setAddress(e.target.value);
-  }
-
-  function onChangePhoneNumber(e) {
-    setPhoneNumber(e.target.value);
+  function handleDialogOpen() {
+    setOpenDialog(true);
   }
 
   function postPizzaOrders(orderID) {
@@ -147,6 +118,7 @@ function Cart() {
       orderID = response.data.id;
       postPizzaOrders(orderID);
     });
+    handleDialogOpen();
   }
 
   function getPizzasCost() {
@@ -159,6 +131,47 @@ function Cart() {
 
   const pizzaCost = () => {
     return <div className={classes.element}>Koszt = {getPizzasCost()} zł</div>;
+  };
+
+  function validateForm() {
+    return (
+      name.length > 0 &&
+      surname.length > 0 &&
+      email.length > 0 &&
+      address.length > 0 &&
+      phoneNumber.length > 0
+    );
+  }
+
+  function onChangeName(e) {
+    setName(e.target.value);
+  }
+
+  function onChangeSurname(e) {
+    setSurname(e.target.value);
+  }
+
+  function onChangeEmail(e) {
+    setEmail(e.target.value);
+  }
+
+  function onChangeAddress(e) {
+    setAddress(e.target.value);
+  }
+
+  function onChangePhoneNumber(e) {
+    setPhoneNumber(e.target.value);
+  }
+
+  const showAllPizzas = () => {
+    return (
+      <div className={classes.container}>
+        {pizzaList.map((pizza) => (
+          <CartItem pizza={pizza} updateState={updateState} />
+        ))}
+        {pizzaCost()}
+      </div>
+    );
   };
 
   return (
@@ -245,6 +258,7 @@ function Cart() {
           Złóż zamówienie
         </Button>
       </form>
+      <OrderDialog open={openDialog} onClose={handleDialogClose} />
     </Box>
   );
 }
