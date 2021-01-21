@@ -15,14 +15,13 @@ function App() {
   const [ingredients, setIngredients] = useState([]);
   const [username, setUsername] = useState([]);
   const [password, setPassword] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  function changeUsername(username){
-    setUsername(username);
+
+  function changeIsLoggedIn(bool){
+    setIsLoggedIn(bool);
   }
 
-  function changePassword(password){
-    setPassword(password);
-  }
   function fetchPizzas() {
     return PizzaAPI.getAllPizzas().then((response) => setPizzas(response.data));
   }
@@ -59,10 +58,19 @@ function App() {
               <PizzaContainer
                 fetchIngredients={fetchIngredients}
                 fetchPizzas={fetchPizzas}
+                isLoggedIn={isLoggedIn}
               />
             )}
+          /
+          <Route
+              path="/login"
+              render={(props) => (
+                  <Login
+                      isLoggedIn={isLoggedIn}
+                      changeIsLoggedIn={changeIsLoggedIn}
+                  />
+              )}
           />
-          <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/cart" component={Cart} />
         </div>

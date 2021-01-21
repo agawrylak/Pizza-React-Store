@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-function PizzaContainer() {
+function PizzaContainer(props) {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function PizzaContainer() {
   };
 
   const makeAllPizzas = ({pizzass}) => {
-    if(pizzas.length===0 || pizzas.length > 100){
+    if(!props.isLoggedIn){
       return "Nie masz dostepu"
     }else{
       return pizzas.map((pizza, index) => (

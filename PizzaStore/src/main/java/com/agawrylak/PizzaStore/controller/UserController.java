@@ -15,14 +15,25 @@ public class UserController {
 
     private final UserService userService;
 
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @CrossOrigin
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody final UserDTO userDTO, final BindingResult bindingResult){
-        return null;
+    public ResponseEntity<String> login(@RequestBody final UserDTO userDTO, final BindingResult bindingResult){
+            User user = userService.getUserByUsername(dto.getByUsername());
+            boolean isPasswordValid = passwordEncoder().matches(userDTO.getPassword(),user.getPassword());
+            if(isPasswordValid == true){
+                return new ResponseEntity.ok("User is valid")
+            }else{
+                return new ResponseEntity.error("User is invalid")
+            }
 
     }
 

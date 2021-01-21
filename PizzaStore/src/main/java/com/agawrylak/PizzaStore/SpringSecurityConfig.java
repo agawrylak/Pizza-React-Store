@@ -54,10 +54,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+   // @Bean
+   // public PasswordEncoder passwordEncoder(){
+   //     return new BCryptPasswordEncoder();
+   // }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

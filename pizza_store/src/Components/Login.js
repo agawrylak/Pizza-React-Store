@@ -41,11 +41,12 @@ const useStyles = makeStyles({
   },
 });
 
-function Login() {
+function Login(props) {
   const classes = useStyles();
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
 
   function validateForm() {
     return login.length > 0 && password.length > 0;
@@ -65,62 +66,79 @@ function Login() {
       username: login,
       password: password
     };
-    axios.post("http://localhost:9090/performLogin", null,
-        {
-          params: {
-            username: login,
-            password: password
-          },
-        }).then(data => {
-      console.log(data.data);
-    }).catch(err => {
-      console.error(err);
+    UserAPI.loginUser(user).then(res => {
+      if(res.ok){
+        props.changeIsLoggedIn(true)
+      }
+      if(!res.ok){
+        props.changeIsLoggedIn(false)
+      }
     })
+  }
+  function handleLogout(){
+    props.changeIsLoggedIn(false);
+  }
+
+  const LoginOrLogout  = () => {
+    if(props.isLoggedIn===true)
+    return(
+        <Button
+            onClick={handleLogout}
+            className={classes.button}
+            disabled={!validateForm()}
+        >
+          Zaloguj się
+        </Button>
+
+    )else{
+      return (
+      <div>
+        <Box className={classes.box} boxShadow={2}>
+          <form onSubmit={onSubmit}>
+            <FormControl
+                className={classes.element}
+                component="fieldset"
+                variant="filled"
+            >
+              <FormLabel className={classes.element} component="legend">
+                Login
+              </FormLabel>
+              <TextField
+                  className={classes.element}
+                  value={login}
+                  onChange={onChangeLogin}
+              />
+            </FormControl>
+            <FormControl
+                type={password}
+                className={classes.element}
+                component="fieldset"
+                variant="filled"
+            >
+              <FormLabel className={classes.element} component="legend">
+                Hasło
+              </FormLabel>
+              <TextField
+                  className={classes.element}
+                  value={password}
+                  onChange={onChangePassword}
+              />
+            </FormControl>
+            <Button
+                type="submit"
+                className={classes.button}
+                disabled={!validateForm()}
+            >
+              Zaloguj się
+            </Button>
+          </form>
+        </Box>
+      </div>
+    )}
   }
 
   return (
-    <div>
-      <Box className={classes.box} boxShadow={2}>
-        <form onSubmit={onSubmit}>
-          <FormControl
-            className={classes.element}
-            component="fieldset"
-            variant="filled"
-          >
-            <FormLabel className={classes.element} component="legend">
-              Login
-            </FormLabel>
-            <TextField
-              className={classes.element}
-              value={login}
-              onChange={onChangeLogin}
-            />
-          </FormControl>
-          <FormControl
-            type={password}
-            className={classes.element}
-            component="fieldset"
-            variant="filled"
-          >
-            <FormLabel className={classes.element} component="legend">
-              Hasło
-            </FormLabel>
-            <TextField
-              className={classes.element}
-              value={password}
-              onChange={onChangePassword}
-            />
-          </FormControl>
-          <Button
-            type="submit"
-            className={classes.button}
-            disabled={!validateForm()}
-          >
-            Zaloguj się
-          </Button>
-        </form>
-      </Box>
-    </div>
+   <div>{LoginOrLogout}</div>
   );
 }
 
