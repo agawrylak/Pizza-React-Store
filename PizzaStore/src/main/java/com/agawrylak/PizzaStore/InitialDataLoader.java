@@ -2,7 +2,7 @@ package com.agawrylak.PizzaStore;
 
 import com.agawrylak.PizzaStore.model.Ingredient;
 import com.agawrylak.PizzaStore.model.Pizza;
-import com.agawrylak.PizzaStore.services.PizzaService;
+import com.agawrylak.PizzaStore.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

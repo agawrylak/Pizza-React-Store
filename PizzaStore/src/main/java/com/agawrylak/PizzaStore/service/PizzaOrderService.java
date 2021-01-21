@@ -1,4 +1,4 @@
-package com.agawrylak.PizzaStore.services;
+package com.agawrylak.PizzaStore.service;
 
 import com.agawrylak.PizzaStore.model.PizzaOrder;
 import com.agawrylak.PizzaStore.repository.PizzaOrderRepository;

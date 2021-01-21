@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const IngredientAPI = {
+
   postIngredient(ingredient) {
     const url = "http://localhost:9090/ingredient/add";
     return axios.post(url, ingredient);

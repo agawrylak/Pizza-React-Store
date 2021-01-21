@@ -8,6 +8,7 @@ import Login from "./Login";
 import Cart from "./Cart";
 import { PizzaAPI } from "../api/PizzaAPI";
 import { IngredientAPI } from "../api/IngredientAPI";
+import Register from "./Register";
 
 function App() {
   const [pizzas, setPizzas] = useState([]);
@@ -53,6 +54,7 @@ function App() {
             )}
           />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route path="/cart" component={Cart} />
         </div>
       </HashRouter>

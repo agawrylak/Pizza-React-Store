@@ -1,7 +1,7 @@
-package com.agawrylak.PizzaStore.controllers;
+package com.agawrylak.PizzaStore.controller;
 
 import com.agawrylak.PizzaStore.model.Ingredient;
-import com.agawrylak.PizzaStore.services.IngredientService;
+import com.agawrylak.PizzaStore.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

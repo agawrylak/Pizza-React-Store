@@ -1,12 +1,10 @@
-package com.agawrylak.PizzaStore.services;
+package com.agawrylak.PizzaStore.service;
 
-import com.agawrylak.PizzaStore.model.Ingredient;
 import com.agawrylak.PizzaStore.model.Pizza;
 import com.agawrylak.PizzaStore.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

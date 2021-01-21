@@ -8,6 +8,8 @@ import {
   FormLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import {UserAPI} from "../api/UserAPI";
+import axios from "axios";
 
 const useStyles = makeStyles({
   box: {
@@ -59,6 +61,21 @@ function Login() {
 
   function onSubmit(e) {
     e.preventDefault();
+    const user = {
+      username: login,
+      password: password
+    };
+    axios.post("http://localhost:9090/performLogin", null,
+        {
+          params: {
+            username: login,
+            password: password
+          },
+        }).then(data => {
+      console.log(data.data);
+    }).catch(err => {
+      console.error(err);
+    })
   }
 
   return (

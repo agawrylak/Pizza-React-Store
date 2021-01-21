@@ -88,6 +88,9 @@ export default function Nav() {
                 <NavLink to="/login">Login</NavLink>
               </MenuItem>
               <MenuItem onClick={handleClose}>
+                <NavLink to="/register">Rejestracja</NavLink>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
                 <NavLink to="/cart">Koszyk</NavLink>
               </MenuItem>
             </Menu>

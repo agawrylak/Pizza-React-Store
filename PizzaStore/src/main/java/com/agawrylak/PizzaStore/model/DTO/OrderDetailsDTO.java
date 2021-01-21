@@ -1,4 +1,4 @@
-package com.agawrylak.PizzaStore.model.POJO;
+package com.agawrylak.PizzaStore.model.DTO;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 @Setter
 @Getter
 @EqualsAndHashCode
-public class OrderDetailsPOJO {
+public class OrderDetailsDTO {
     private String name;
     private String surname;
     private String address;
     private String email;
     private Long phoneNumber;
-    private ArrayList<PizzaOrderPOJO> pizzaOrderPOJOs;
+    private ArrayList<PizzaOrderDTO> pizzaOrderDTOS;
 }

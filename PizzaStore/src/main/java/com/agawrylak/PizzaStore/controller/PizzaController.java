@@ -1,10 +1,10 @@
-package com.agawrylak.PizzaStore.controllers;
+package com.agawrylak.PizzaStore.controller;
 
 import com.agawrylak.PizzaStore.model.Ingredient;
-import com.agawrylak.PizzaStore.model.POJO.PizzaPOJO;
+import com.agawrylak.PizzaStore.model.DTO.PizzaDTO;
 import com.agawrylak.PizzaStore.model.Pizza;
-import com.agawrylak.PizzaStore.services.IngredientService;
-import com.agawrylak.PizzaStore.services.PizzaService;
+import com.agawrylak.PizzaStore.service.IngredientService;
+import com.agawrylak.PizzaStore.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -40,10 +40,10 @@ public class PizzaController {
   @CrossOrigin
   @PostMapping("/pizza/add")
   public ResponseEntity<Pizza> add(
-      @RequestBody final PizzaPOJO pizzaPOJO, final BindingResult bindingResult) {
+          @RequestBody final PizzaDTO pizzaDTO, final BindingResult bindingResult) {
     Pizza pizza = new Pizza();
-    pizza.setName(pizzaPOJO.getName());
-    for (String ingredient : pizzaPOJO.getIngredients()) {
+    pizza.setName(pizzaDTO.getName());
+    for (String ingredient : pizzaDTO.getIngredients()) {
       Ingredient newIngredient = new Ingredient(ingredient);
       if (ingredientService.isDuplicate(newIngredient)) {
         pizza.getIngredients().add(ingredientService.findByName(newIngredient.getName()));

@@ -1,11 +1,11 @@
-package com.agawrylak.PizzaStore.controllers;
+package com.agawrylak.PizzaStore.controller;
 
 import com.agawrylak.PizzaStore.model.OrderDetails;
-import com.agawrylak.PizzaStore.model.POJO.PizzaOrderPOJO;
+import com.agawrylak.PizzaStore.model.DTO.PizzaOrderDTO;
 import com.agawrylak.PizzaStore.model.PizzaOrder;
-import com.agawrylak.PizzaStore.services.OrderDetailsService;
-import com.agawrylak.PizzaStore.services.PizzaOrderService;
-import com.agawrylak.PizzaStore.services.PizzaService;
+import com.agawrylak.PizzaStore.service.OrderDetailsService;
+import com.agawrylak.PizzaStore.service.PizzaOrderService;
+import com.agawrylak.PizzaStore.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -33,12 +33,12 @@ public class PizzaOrderController {
   @CrossOrigin
   @PostMapping("/pizzaorder/add")
   public ResponseEntity<PizzaOrder> add(
-      @RequestBody final PizzaOrderPOJO pizzaOrderPOJO, final BindingResult bindingResult) {
+          @RequestBody final PizzaOrderDTO pizzaOrderDTO, final BindingResult bindingResult) {
 
     PizzaOrder pizzaOrder = new PizzaOrder();
-    pizzaOrder.setPizza(pizzaService.findByName(pizzaOrderPOJO.getPizza()));
-    pizzaOrder.setQuantity(pizzaOrderPOJO.getQuantity());
-    Long orderDetailsID = (long) pizzaOrderPOJO.getOrderDetailsID();
+    pizzaOrder.setPizza(pizzaService.findByName(pizzaOrderDTO.getPizza()));
+    pizzaOrder.setQuantity(pizzaOrderDTO.getQuantity());
+    Long orderDetailsID = (long) pizzaOrderDTO.getOrderDetailsID();
     OrderDetails orderDetails = orderDetailsService.findById(orderDetailsID);
     orderDetails.getPizzaOrders().add(pizzaOrder);
     pizzaOrder.setOrderDetails(orderDetails);

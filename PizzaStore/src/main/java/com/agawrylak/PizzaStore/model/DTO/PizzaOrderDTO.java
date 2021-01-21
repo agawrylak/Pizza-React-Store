@@ -1,4 +1,4 @@
-package com.agawrylak.PizzaStore.model.POJO;
+package com.agawrylak.PizzaStore.model.DTO;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @EqualsAndHashCode
-public class PizzaPOJO {
-    private String name;
-    private String[] ingredients;
+public class PizzaOrderDTO {
+  private String pizza;
+  private int quantity;
+  private int orderDetailsID;
 }
