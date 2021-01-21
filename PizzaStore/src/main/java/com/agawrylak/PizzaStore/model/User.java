@@ -1,6 +1,7 @@
 package com.agawrylak.PizzaStore.model;
 
 import com.agawrylak.PizzaStore.enums.Role;
+import com.sun.istack.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "username")
+    @NotNull
+    @Column(name = "username",unique=true)
     private String username;
 
     @Column(name = "password")

@@ -8,5 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService extends UserDetailsService {
     public User registerNewUserAccount(UserDTO accountDto);
+    public User getUserByUsername(String username);
+    public Boolean existsByUsername(String username);
 
 }

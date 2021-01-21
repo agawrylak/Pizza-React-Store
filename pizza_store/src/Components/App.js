@@ -61,7 +61,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
               />
             )}
-          /
+          />
           <Route
               path="/login"
               render={(props) => (
