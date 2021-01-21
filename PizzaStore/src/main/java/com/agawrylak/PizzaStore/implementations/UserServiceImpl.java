@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("username = " + username);
         User user = userRepository.getUserByUsername(username);
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+        org.springframework.security.core.userdetails.User userd = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+        return userd;
         //userRepository.getUserByUsername(username); TODO: if it's not working bring this back!
     }
 

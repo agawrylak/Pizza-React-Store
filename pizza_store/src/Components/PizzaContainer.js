@@ -37,17 +37,26 @@ function PizzaContainer() {
     );
   };
 
-  const makeAllPizzas = (pizzas) => {
-    return pizzas.map((pizza, index) => (
-      <div key={index}> {makePizza(pizza)} </div>
-    ));
+  const makeAllPizzas = ({pizzass}) => {
+    if(pizzas.length===0 || pizzas.length > 100){
+      return "Nie masz dostepu"
+    }else{
+      return pizzas.map((pizza, index) => (
+          <div key={index}> {makePizza(pizza)} </div>
+      ))
+    }
+
+
   };
 
   const classes = useStyles();
   return (
     <div className={classes.pizzaContainer}>
       <Grid container spacing={24}>
-        {makeAllPizzas(pizzas)}
+        {
+          makeAllPizzas(pizzas)
+        }
+
       </Grid>
     </div>
   );

@@ -7,6 +7,7 @@ import com.agawrylak.PizzaStore.service.IngredientService;
 import com.agawrylak.PizzaStore.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class PizzaController {
   @GetMapping("/pizza/all")
   @ResponseBody
   @CrossOrigin
-  public List<Pizza> getAll() {
+  public List<Pizza> getAll(Authentication authentication) {
     return pizzaService.findAll();
   }
 

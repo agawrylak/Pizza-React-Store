@@ -13,7 +13,16 @@ import Register from "./Register";
 function App() {
   const [pizzas, setPizzas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [username, setUsername] = useState([]);
+  const [password, setPassword] = useState([]);
 
+  function changeUsername(username){
+    setUsername(username);
+  }
+
+  function changePassword(password){
+    setPassword(password);
+  }
   function fetchPizzas() {
     return PizzaAPI.getAllPizzas().then((response) => setPizzas(response.data));
   }
